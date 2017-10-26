@@ -57,10 +57,10 @@ export const asyncRouterMap = [
     icon: 'icon',
     name: '权限设置',
     children: [
-      {path: 'index', component: _import('auth/user'), name: '用户'},
       {path: 'sysModel', component: _import('auth/sysModel'), name: '系统模块'},
-      {path: 'func', component: _import('auth/func'), name: '系统功能'},
-      {path: 'role', component: _import('auth/role'), name: '角色'}
+      {path: 'func', component: _import('auth/func'), name: '功能'},
+      {path: 'role', component: _import('auth/role'), name: '角色'},
+      {path: 'index', component: _import('auth/user'), name: '用户'}
     ]
   }
 ]

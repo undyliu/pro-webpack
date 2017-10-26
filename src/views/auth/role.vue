@@ -28,11 +28,11 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="操作" width="150">
+      <el-table-column align="center" label="操作" width="200">
         <template scope="scope">
-          <el-button size="small" type="success" @click="handleModifyStatus(scope.row,'published')">编辑
+          <el-button size="small" type="success" icon="edit" @click="handleModifyStatus(scope.row,'published')">编辑
           </el-button>
-          <el-button size="small" type="danger" @click="handleModifyStatus(scope.row,'deleted')">删除
+          <el-button size="small" type="danger" icon="delete" @click="handleModifyStatus(scope.row,'deleted')">删除
           </el-button>
         </template>
       </el-table-column>
@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import { fetchList } from '@/api/role'
+import { fetchList } from '@/api/auth/role'
 import waves from '@/directive/waves/index.js' // 水波纹指令
 // import { parseTime } from '@/utils'
 
