@@ -66,16 +66,27 @@
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form class="small-space" :model="sysForm" :rules="rules" ref="sysForm" label-position="left" label-width="80px" style='width: 400px; margin-left:50px;'>
-        <el-form-item label="模块代码" prop="code">
-          <el-input v-model="sysForm.code"></el-input>
+        <el-form-item label="系统模块" prop="sysModel">
+          <el-select class="filter-item" v-model="sysForm.sysModel" placeholder="请选择">
+            <el-option v-for="item in  sysModelOptions" :key="item.key" :label="item.display_name" :value="item.key">
+            </el-option>
+          </el-select>
         </el-form-item>
 
-        <el-form-item label="模块名称" prop="name">
-          <el-input v-model="sysForm.name"></el-input>
+        <el-form-item label="功能分组">
+          <el-select class="filter-item" v-model="sysForm.funcGroup" placeholder="请选择">
+            <el-option v-for="item in  funcGroupOptions" :key="item.key" :label="item.display_name" :value="item.key">
+            </el-option>
+          </el-select>
+          <el-button style="margin-left: 10px;" type="primary" icon="plus">添加</el-button>
         </el-form-item>
 
-        <el-form-item label="主页" prop="homePage">
-          <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="sysForm.homePage">
+        <el-form-item label="URL" prop="url">
+          <el-input v-model="sysForm.url"></el-input>
+        </el-form-item>
+
+        <el-form-item label="描述" prop="desc">
+          <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="sysForm.desc">
           </el-input>
         </el-form-item>
       </el-form>
@@ -90,7 +101,7 @@
 </template>
 
 <script>
-import { fetchList } from '@/api/auth/sysModel'
+import { fetchList } from '@/api/auth/func'
 import waves from '@/directive/waves/index.js' // 水波纹指令
 
 const sysModelOptions = [
@@ -109,7 +120,7 @@ const funcGroupOptions = [
 ]
 
 export default {
-  name: 'sysModel',
+  name: 'func',
   directives: {
     waves
   },
@@ -129,9 +140,9 @@ export default {
       },
       sysForm: {
         id: undefined,
-        code: '',
-        name: '',
-        homePage: ''
+        sysModel: '',
+        url: '',
+        desc: ''
       },
       dialogFormVisible: false,
       dialogStatus: '',
@@ -142,16 +153,15 @@ export default {
       dialogPvVisible: false,
       tableKey: 0,
       rules: {
-        code: [
-          { required: true, message: '请输入模块代码', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+        sysModel: [
+          { required: true, message: '请选择系统模块', trigger: 'blur' }
         ],
-        name: [
-          { required: true, message: '请输入模块名称', trigger: 'blur' },
+        url: [
+          { required: true, message: '请输入URL', trigger: 'blur' },
           { min: 3, max: 5, message: '长度在 3 到 50 个字符', trigger: 'blur' }
         ],
-        homePage: [
-          { required: true, message: '请输入主页', trigger: 'blur' },
+        desc: [
+          { required: true, message: '请输入描述', trigger: 'blur' },
           { min: 3, max: 5, message: '长度在 3 到 150 个字符', trigger: 'blur' }
         ]
       }
@@ -187,7 +197,9 @@ export default {
       this.dialogFormVisible = true
     },
     handleUpdate (row) {
-      row.edit = !row.edit
+      this.sysForm = Object.assign({}, row)
+      this.dialogStatus = 'update'
+      this.dialogFormVisible = true
     },
     handleDelete (row) {
       this.$notify({

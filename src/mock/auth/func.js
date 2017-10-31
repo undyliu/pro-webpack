@@ -5,18 +5,16 @@ const List = []
 List.push(Mock.mock({
   id: '@increment',
   sysModel: '基础数据',
-  name: '系统管理员',
+  funcGroup: '商品管理',
+  url: 'http://www.baidu.com',
   desc: '这是一个测试的角色'
 }))
 
 export default {
   getList: config => {
-    const { name, page = 1, limit = 20, sort } = param2Obj(config.url)
+    const { page = 1, limit = 20, sort } = param2Obj(config.url)
 
-    let mockList = List.filter(item => {
-      if (name && item.name.indexOf(name) < 0) return false
-      return true
-    })
+    let mockList = List
 
     if (sort === '-id') {
       mockList = mockList.reverse()

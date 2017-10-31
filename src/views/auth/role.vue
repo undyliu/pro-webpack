@@ -41,11 +41,11 @@
 
       <el-table-column align="center" label="操作" width="300">
         <template scope="scope">
-          <el-button size="small" type="primary" icon="setting" @click="handleModifyStatus(scope.row,'published')">设置权限
+          <el-button size="small" type="primary" icon="setting" @click="handleSetAuth(scope.row)">设置权限
           </el-button>
-          <el-button size="small" type="primary" icon="edit" @click="handleModifyStatus(scope.row,'published')">编辑
+          <el-button size="small" type="primary" icon="edit" @click="handleUpdate(scope.row)">编辑
           </el-button>
-          <el-button size="small" type="danger" icon="delete" @click="handleModifyStatus(scope.row,'deleted')">删除
+          <el-button size="small" type="danger" icon="delete" @click="handleDelete(scope.row)">删除
           </el-button>
         </template>
       </el-table-column>
@@ -59,21 +59,21 @@
     </div>
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
-      <el-form class="small-space" :model="temp" label-position="left" label-width="70px" style='width: 500px; margin-left:50px;'>
+      <el-form class="small-space" :rules="rules" ref="sysForm"  :model="sysForm" label-position="left" label-width="80px" style='width: 500px; margin-left:50px;'>
 
-        <el-form-item label="系统模块">
-          <el-select class="filter-item" v-model="temp.type" placeholder="请选择">
+        <el-form-item label="系统模块" prop="sysModel">
+          <el-select class="filter-item" v-model="sysForm.sysModel" placeholder="请选择">
             <el-option v-for="item in  sysModelOptions" :key="item.key" :label="item.display_name" :value="item.key">
             </el-option>
           </el-select>
         </el-form-item>
 
-        <el-form-item label="角色名称">
-          <el-input v-model="temp.title"></el-input>
+        <el-form-item label="角色名称" prop="name">
+          <el-input v-model="sysForm.name"></el-input>
         </el-form-item>
 
-        <el-form-item label="描述">
-          <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="temp.remark">
+        <el-form-item label="描述" prop="desc">
+          <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="sysForm.desc">
           </el-input>
         </el-form-item>
 <!--
@@ -102,6 +102,10 @@
       </div>
     </el-dialog>
 
+    <el-dialog :title="权限设置" :visible.sync="authSettingFormVisible">
+      <el-form class="small-space" ref="settingForm" label-position="left" label-width="80px" style='width: 500px; margin-left:50px;'>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
@@ -134,8 +138,9 @@ export default {
         name: undefined,
         sort: '+id'
       },
-      temp: {
+      sysForm: {
         id: undefined,
+        sysModel: '',
         name: '',
         desc: ''
       },
@@ -146,7 +151,21 @@ export default {
         create: '创建'
       },
       dialogPvVisible: false,
-      tableKey: 0
+      tableKey: 0,
+      rules: {
+        sysModel: [
+          { required: true, message: '请选择系统模块', trigger: 'blur' }
+        ],
+        name: [
+          { required: true, message: '请输入模块名称', trigger: 'blur' },
+          { min: 3, max: 5, message: '长度在 3 到 50 个字符', trigger: 'blur' }
+        ],
+        desc: [
+          { required: true, message: '请输入主页', trigger: 'blur' },
+          { min: 3, max: 5, message: '长度在 3 到 150 个字符', trigger: 'blur' }
+        ]
+      },
+      authSettingFormVisible: false
     }
   },
   created () {
@@ -173,20 +192,16 @@ export default {
       this.listQuery.page = val
       this.getList()
     },
-    handleModifyStatus (row, status) {
-      this.$message({
-        message: '操作成功',
-        type: 'success'
-      })
-      row.status = status
-    },
     handleCreate () {
-      this.resetTemp()
+      this.resetSysForm()
       this.dialogStatus = 'create'
       this.dialogFormVisible = true
     },
+    handleSetAuth (row) {
+      this.authSettingFormVisible = true
+    },
     handleUpdate (row) {
-      this.temp = Object.assign({}, row)
+      this.sysForm = Object.assign({}, row)
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
     },
@@ -232,8 +247,8 @@ export default {
         duration: 2000
       }) */
     },
-    resetTemp () {
-      this.temp = {
+    resetSysForm () {
+      this.sysForm = {
         id: undefined,
         name: '',
         desc: ''
