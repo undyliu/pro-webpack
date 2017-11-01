@@ -13,33 +13,33 @@
     <el-table :key='tableKey' :data="list" v-loading="listLoading" element-loading-text="正在加载..." border fit highlight-current-row style="width: 100%">
 
       <el-table-column align="center" label="序号" width="65">
-        <template scope="scope">
+        <template slot-scope="scope">
           <span>{{scope.row.id}}</span>
         </template>
       </el-table-column>
 
       <el-table-column width="150px" align="center" label="模块代码">
-        <template scope="scope">
+        <template slot-scope="scope">
           <span>{{scope.row.code}}</span>
         </template>
       </el-table-column>
 
       <el-table-column width="200px" align="center" label="模块名称">
-        <template scope="scope">
+        <template slot-scope="scope">
           <el-input v-show="scope.row.edit" size="small" v-model="scope.row.name"></el-input>
           <span v-show="!scope.row.edit">{{ scope.row.name }}</span>
         </template>
       </el-table-column>
       
       <el-table-column width="350px" align="center" label="主页">
-        <template scope="scope">
+        <template slot-scope="scope">
           <el-input v-show="scope.row.edit" size="small" v-model="scope.row.homePage"></el-input>
           <span v-show="!scope.row.edit">{{ scope.row.homePage }}</span>
         </template>
       </el-table-column>
 
       <el-table-column align="center" label="操作" width="200">
-        <template scope="scope">
+        <template slot-scope="scope">
           <el-button :type="scope.row.edit?'success':'primary'" @click='handleUpdate(scope.row)' size="small" icon="edit">{{scope.row.edit?'完成':'编辑'}}</el-button>
           </el-button>
           <el-button size="small" type="danger" icon="delete" @click="handleDelete(scope.row)">删除

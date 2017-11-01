@@ -18,37 +18,37 @@
     <el-table :key='tableKey' :data="list" v-loading="listLoading" element-loading-text="正在加载..." border fit highlight-current-row style="width: 100%">
 
       <el-table-column align="center" label="序号" width="65">
-        <template scope="scope">
+        <template slot-scope="scope">
           <span>{{scope.row.id}}</span>
         </template>
       </el-table-column>
 
       <el-table-column width="150px" align="center" label="系统模块">
-        <template scope="scope">
+        <template slot-scope="scope">
           <span>{{scope.row.sysModel}}</span>
         </template>
       </el-table-column>
 
       <el-table-column width="150px" align="center" label="所属分组">
-        <template scope="scope">
+        <template slot-scope="scope">
           <span>{{scope.row.funcGroup}}</span>
         </template>
       </el-table-column>
       
       <el-table-column width="250px" align="center" label="URL">
-        <template scope="scope">
+        <template slot-scope="scope">
           <span>{{scope.row.url}}</span>
         </template>
       </el-table-column>
 
       <el-table-column width="250px" align="center" label="描述">
-        <template scope="scope">
+        <template slot-scope="scope">
           <span>{{scope.row.desc}}</span>
         </template>
       </el-table-column>
 
       <el-table-column align="center" label="操作" width="200">
-        <template scope="scope">
+        <template slot-scope="scope">
           <el-button type="primary" @click='handleUpdate(scope.row)' size="small" icon="edit">编辑</el-button>
           </el-button>
           <el-button size="small" type="danger" icon="delete" @click="handleDelete(scope.row)">删除

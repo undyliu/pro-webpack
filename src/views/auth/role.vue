@@ -16,31 +16,31 @@
     <el-table :key='tableKey' :data="list" v-loading="listLoading" element-loading-text="正在加载..." border fit highlight-current-row style="width: 100%">
 
       <el-table-column align="center" label="序号" width="65">
-        <template scope="scope">
+        <template slot-scope="scope">
           <span>{{scope.row.id}}</span>
         </template>
       </el-table-column>
       
       <el-table-column width="150px" align="center" label="系统模块">
-        <template scope="scope">
+        <template slot-scope="scope">
           <span>{{scope.row.sysModel}}</span>
         </template>
       </el-table-column>
 
       <el-table-column width="150px" align="center" label="角色名称">
-        <template scope="scope">
+        <template slot-scope="scope">
           <span>{{scope.row.name}}</span>
         </template>
       </el-table-column>
       
       <el-table-column width="300px" align="center" label="描述">
-        <template scope="scope">
+        <template slot-scope="scope">
           <span>{{scope.row.desc}}</span>
         </template>
       </el-table-column>
 
       <el-table-column align="center" label="操作" width="300">
-        <template scope="scope">
+        <template slot-scope="scope">
           <el-button size="small" type="primary" icon="setting" @click="handleSetAuth(scope.row)">设置权限
           </el-button>
           <el-button size="small" type="primary" icon="edit" @click="handleUpdate(scope.row)">编辑
@@ -102,7 +102,7 @@
       </div>
     </el-dialog>
 
-    <el-dialog :title="权限设置" :visible.sync="authSettingFormVisible">
+    <el-dialog title="权限设置" :visible.sync="authSettingFormVisible">
       <el-form class="small-space" ref="settingForm" label-position="left" label-width="80px" style='width: 500px; margin-left:50px;'>
       </el-form>
     </el-dialog>

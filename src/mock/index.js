@@ -3,6 +3,7 @@ import loginAPI from './login'
 import roleAPI from './auth/role'
 import sysModelAPI from './auth/sysModel'
 import funcAPI from './auth/func'
+import userAPI from './auth/user'
 
 Mock.setup({
   timeout: '350-600'
@@ -19,5 +20,7 @@ Mock.mock(/\/role\/list/, 'get', roleAPI.getList)
 Mock.mock(/\/sysModel\/list/, 'get', sysModelAPI.getList)
 // 功能相关
 Mock.mock(/\/func\/list/, 'get', funcAPI.getList)
+// 用户相关
+Mock.mock(/\/user\/list/, 'get', userAPI.getList)
 
 export default Mock
