@@ -54,7 +54,7 @@ export const asyncRouterMap = [
     path: '/auth',
     component: Layout,
     redirect: '/auth/index',
-    icon: 'icon',
+    icon: 'password',
     name: '权限设置',
     children: [
       {path: 'sysModel', component: _import('auth/sysModel'), name: '系统模块'},
