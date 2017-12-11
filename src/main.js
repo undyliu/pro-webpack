@@ -11,6 +11,9 @@ import './icons'
 import './permission'
 import './mock'  // 该项目所有请求使用mockjs模拟
 
+var ElTreeGrid = require('element-tree-grid')
+Vue.component(ElTreeGrid.name, ElTreeGrid)
+
 Vue.use(ElementUI)
 
 Object.keys(filters).forEach(key => {
