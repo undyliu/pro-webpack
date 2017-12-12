@@ -10,11 +10,14 @@ import 'element-ui/lib/theme-default/index.css'
 import './icons'
 import './permission'
 import './mock'  // 该项目所有请求使用mockjs模拟
+import VueTabs from 'vue-nav-tabs'
+import 'vue-nav-tabs/themes/vue-tabs.css'
 
 var ElTreeGrid = require('element-tree-grid')
 Vue.component(ElTreeGrid.name, ElTreeGrid)
 
 Vue.use(ElementUI)
+Vue.use(VueTabs)
 
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])

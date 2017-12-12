@@ -41,6 +41,13 @@ export const constantRouterMap = [
     icon: 'people',
     noDropdown: true,
     children: [{ path: 'index', component: _import('grid/treeGrid'), name: '树表' }]
+  },
+  {
+    path: '/tab',
+    component: Layout,
+    icon: 'people',
+    noDropdown: true,
+    children: [{ path: 'index', component: _import('tab/index'), name: '页签' }]
   }
 ]
 

@@ -31,13 +31,14 @@
 
 <script>
 var trees = [{
-	'id': 1,
+  'id': 1,
   'label': 'System',
   'parent_id': null,
   'url': null,
   'depth': 0,
   'child_num': 3,
-  'description': 'System Manager',
+  'description': 'System Manager' // ,
+  /*
   'children': [{
          'id': 2,
          'label': 'base',
@@ -73,19 +74,20 @@ var trees = [{
              'description': 'User Manager',
          }]
      }]
- }]
+     */
+}]
 export default {
   name: 'func',
   data () {
     return {
-    	model: { menus: trees }
+      model: { menus: trees }
     }
   },
-  methods:{
-    remote(row,callback){
-      setTimeout(function() {
+  methods: {
+    remote (row, callback) {
+      setTimeout(function () {
         callback(row.children)
-      },500)
+      }, 500)
     }
   }
 }
