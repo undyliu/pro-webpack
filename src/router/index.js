@@ -31,23 +31,22 @@ export const constantRouterMap = [
     path: '/introduction',
     component: Layout,
     redirect: '/introduction/index',
-    icon: 'people',
     noDropdown: true,
-    children: [{ path: 'index', component: _import('introduction/index'), name: '简述' }]
+    children: [{ path: 'index', component: _import('introduction/index'), name: '简述', meta: { icon: 'people', title: '简述' } }]
   },
   {
     path: '/treeGrid',
     component: Layout,
     icon: 'people',
     noDropdown: true,
-    children: [{ path: 'index', component: _import('grid/treeGrid'), name: '树表' }]
+    children: [{ path: 'index', component: _import('grid/treeGrid'), name: '树表', meta: { title: '树表' } }]
   },
   {
     path: '/tab',
     component: Layout,
     icon: 'people',
     noDropdown: true,
-    children: [{ path: 'index', component: _import('tab/index'), name: '页签' }]
+    children: [{ path: 'index', component: _import('tab/index'), name: '页签', meta: { title: '页签' } }]
   }
 ]
 
@@ -62,7 +61,7 @@ export const asyncRouterMap = [
     component: Layout,
     icon: 'icon',
     noDropdown: true,
-    children: [{ path: 'index', component: _import('svg-icons/index'), name: 'icons' }]
+    children: [{ path: 'index', component: _import('svg-icons/index'), name: 'icons', meta: { title: 'icons' } }]
   },
   {
     path: '/auth',
@@ -70,11 +69,12 @@ export const asyncRouterMap = [
     redirect: '/auth/index',
     icon: 'password',
     name: '权限设置',
+    meta: { title: '权限设置' },
     children: [
-      {path: 'sysModel', component: _import('auth/sysModel'), name: '系统模块'},
-      {path: 'func', component: _import('auth/func'), name: '功能'},
-      {path: 'role', component: _import('auth/role'), name: '角色'},
-      {path: 'index', component: _import('auth/user'), name: '用户'}
+      {path: 'sysModel', component: _import('auth/sysModel'), name: '系统模块', meta: { title: '系统模块' }},
+      {path: 'func', component: _import('auth/func'), name: '功能', meta: { title: '功能' }},
+      {path: 'role', component: _import('auth/role'), name: '角色', meta: { title: '角色' }},
+      {path: 'index', component: _import('auth/user'), name: '用户', meta: { title: '用户' }}
     ]
   }
 ]
